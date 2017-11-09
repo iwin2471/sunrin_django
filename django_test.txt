@@ -1,0 +1,4 @@
+{% load staticfiles %} 이거없어서 에러
+firstapp\static\firstapp\css\test.css 이런식으로 불러옴
+
+{% static 'firstapp\img\django_%}

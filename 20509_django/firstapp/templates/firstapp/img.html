@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    {% block test %}
+    {% endblock%}
+    <ol>
+      <a href="/google"><li>첫번째 페이지</li></a>
+      <a href="2"><li>두번째 페이지</li></a>
+      <a href="3"><li>세번째 페이지</li></a>
+      <a href="4"><li>네번째 페이지</li></a>
+    </ol>
+        <div id="app">
+          <h1> hello </h1>
+          <test></test>
+        </div>
+  </body>
+<script src="{% static 'js/google.js' %}"></script>
+</html>
+
+<img id="#" src="{% static 'img\google3.png' %}">

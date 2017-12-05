@@ -13,4 +13,7 @@ def intro(req):
 def study(req):
     return render(req, 'firstapp\study.html')
 
+def google(req):
+    return render(req, 'firstapp\google.html')
+
 # Create your views here.

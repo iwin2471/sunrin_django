@@ -6,5 +6,6 @@ urlpatterns = [
     url(r'second/', views.second, name='second'),
     url(r'introduce/', views.intro, name='introduce'),
     url(r'study/', views.study, name='study'),
-    url(r'google/', views.study, name='google'),
+    url(r'google/', views.google, name='google'),
+
     ]

@@ -19,22 +19,33 @@ def google(req):
     return render(req, 'firstapp\google.html')
 
 def post_new(request):
-    form = PostForm()
-    return render(request, 'firstapp\post_edit.html', {'form': form})
-
-def post_detail(req):
-    return render(req, 'firstapp\detail.html')
-def post(req):
-    if req.method == "POST ":
-        form = PostForm(req.POST)
-        if form.is_vaild():
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('firstapp.views.post_detail', post_id=poost.pk)
+            return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
-    return render(req, 'firstapp\form.html', {'form': form})
+    return render(request, 'blog/post_edit.html', {'form': form})
+
+def post_detail(req):
+    return render(req, 'firstapp\detail.html')
+
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/post_edit.html', {'form': form})
 
 # Create your views here.

@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<html>
+<body>
+  <div id="flip" class="page_header">
+    <a href="/post/new"><span>글쓰기</span></a>
+      <h1><a href="/">welcome to sunrinpress</a></h1>
+
+      {% block title %}
+      <h1><a href="/second">hello sunrin</a></h1>
+      {% endblock %}
+          <img src = {% static 'firstapp\img\google.png' %}>
+    </div>
+  <div>
+    {% block content %}
+
+    {% endblock %}
+
+    {% for post in posts %}
+    <div class="post">
+    <div class="date">
+      <p> published:{{post.published_date}}</p>
+    </div>
+  <h1><a>
+    {{post.title}}</a></h1>
+    <p>{{post.text}}</p>
+  </div>
+  {% endfor %}
+
+
+</div>
+</body>
+</html>

@@ -4,7 +4,7 @@ from .forms import PostForm
 
 def post_list(req):
     posts = Post.objects.all()
-    return render(req, 'firstapp\main.html', {'posts':posts})
+    return render(req, 'firstapp\post_list.html', {'posts':posts})
 
 def second(req):
     return render(req, 'firstapp\second.html')
@@ -18,34 +18,34 @@ def study(req):
 def google(req):
     return render(req, 'firstapp\google.html')
 
-def post_new(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
+def post_new(req):
+    if req.method == "POST":
+        form = PostForm(req.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
+            post.author = req.user
             post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(req, 'firstapp/post_edit.html', {'form': form})
 
 def post_detail(req):
     return render(req, 'firstapp\detail.html')
 
-def post_edit(request, pk):
+def post_edit(req, pk):
     post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
+    if req.method == "POST":
+        form = PostForm(req.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
+            post.author = req.user
             post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'firstapp/post_edit.html', {'form': form})
 
 # Create your views here.
